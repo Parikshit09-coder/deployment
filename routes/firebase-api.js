@@ -3,7 +3,7 @@ const router = express.Router();
 const multer = require("multer");
 const admin = require("firebase-admin");
 // In firebase-api.js
-const admin = require('firebase-admin');
+
 
 const serviceAccount = {
   type: "service_account",
