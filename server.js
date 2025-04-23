@@ -16,7 +16,7 @@ const docRoutes = require('./routes/authd-other.js')
 const PORT = process.env.PORT || 3000;
 const MONGO_URL = process.env.MONGO_ATLAS_URL;
 app.use(cors({
-    origin: '*', // Explicitly allow frontend
+    origin: 'http://localhost:5173', // Explicitly allow frontend
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
@@ -27,7 +27,7 @@ app.use('/api/auth',authRoutes);
 app.use('/api/patients',authentication,patient_info);
 app.use('/api/store_op',authentication,firebase_api);
 
-mongoose.connect(MONGO_URL, { useUnifiedTopology: true })
+mongoose.connect(MONGO_URL, {})
     .then(() => { console.log("Connected to database"); })
     .catch((err) => {
         console.error("Error in connecting to database:", err);
