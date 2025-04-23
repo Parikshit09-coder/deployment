@@ -31,17 +31,28 @@ router.post("/patient_info/:username", async (req, res) => {
     }
 });
 
-router.post('/register/patient',async (req,res)=>{
-try{
-    const {username,password} = req.body;
-    const user = new User({username,password});
-    await user.save();
- 
-    res.status(201).send('User registered');
+router.post('/register/patient', async (req, res) => {
+    try {
+        const { username, password } = req.body;
 
-}catch(err){
-    res.status(500).send('Error registering user');
-}
+        if (!username || !password) {
+            return res.status(400).json({ error: "Username and password are required." });
+        }
+
+        const userExists = await User.findOne({ username });
+        if (userExists) {
+            return res.status(409).json({ error: "Username already taken." });
+        }
+
+        const newUser = new User({ username, password });
+        await newUser.save();
+
+        res.status(201).json({ message: "User registered successfully!" });
+
+    } catch (err) {
+        console.error("Registration Error:", err);
+        res.status(500).json({ error: "Internal Server Error", details: err.message });
+    }
 });
 router.post('/login/patient',async (req,res)=>{
     try{  const secret_key =  process.env.JWT_SECRET_KEY
