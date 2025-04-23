@@ -2,7 +2,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const User = require('../Models/user');
 const router = express.Router();
-const patientInfo = require('../Models/patient_info');
+const patientInfo = require('../Models/patient_info')
 
 router.post("/patient_info/:username", async (req, res) => {
     const { username } = req.params;
