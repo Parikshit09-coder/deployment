@@ -17,6 +17,7 @@ const PORT = process.env.PORT || 3000;
 const MONGO_URL = process.env.MONGO_ATLAS_URL;
 app.use(cors({
     origin: 'http://localhost:5173', // Explicitly allow frontend
+    methods: ['GET', 'POST', 'PUT', 'DELETE'],
     allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
