@@ -42,7 +42,7 @@ router.post('/register/patient', async (req, res) => {
         const userExists = await User.findOne({ username });
         if (userExists) {
             return res.status(409).json({ error: "Username already taken." });
-        }
+    }
 
         const newUser = new User({ username, password });
         await newUser.save();
