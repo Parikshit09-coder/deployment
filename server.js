@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require("express");
 const app = express();
 const cors = require('cors');
-const bodyParser = require("body-parser");
+
 const mongoose = require("mongoose");
 const authRoutes = require('./routes/auth');
 const authRoutesd = require('./routes/authd');
@@ -16,9 +16,11 @@ const docRoutes = require('./routes/authd-other.js')
 const PORT = process.env.PORT || 3000;
 const MONGO_URL = process.env.MONGO_ATLAS_URL;
 app.use(cors());
+app.use(express.json()); // For JSON bodies
+app.use(express.urlencoded({ extended: true })); // For form data
 
 
-app.use(bodyParser.json());
+
 app.use('/api/authd',authRoutesd);
 app.use('/api/authOthers',authentication,docRoutes);
 app.use('/api/auth',authRoutes);
